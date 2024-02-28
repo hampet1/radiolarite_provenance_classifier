@@ -1,0 +1,20 @@
+{% extends 'public/base.html' %}
+
+
+            {% block content %}
+            <p> <br><br><br>
+            <!-- my main form do not forget rewrite the name of ideas-->
+            
+            
+            <!-- result of our classifier -->
+            <div style="text-align:center">
+            {% if classification==1 %}
+				<h2>the prediction is: epigravettian</h2>
+				
+			{% elif classification==0 %}
+				<h2>the prediction is: epiaurignacian</h2>
+    			
+			{% endif %}
+            </div><br><br><br><br>
+            
+            {% endblock %}

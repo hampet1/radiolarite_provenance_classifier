@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+  <h2>Radiolarite Provenance Classifier</h2><br>
+  <p>This application is used to determine the origin of radiolarite based on proportion of certain chemical elements measure
+  using analytical techniques</p>
+  <p>To fill out the form properly, please check out our <a href="{% url 'guideline' %}">guideline</a>.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="own-bottom-margin">
+  <section class="container-fluid padding">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center mb-4">
+          <h3>Select Analytical Method:</h3></br>
+          <!-- Analysis Type Buttons -->
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Analytical Method
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">LA-ICP-MS</a>
+                <a class="dropdown-item" href="#">XRF</a>
+                <a class="dropdown-item" href="#">LA-ICP-MS + XRF + Spectrophotometry</a>
+              </div>
+            </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
