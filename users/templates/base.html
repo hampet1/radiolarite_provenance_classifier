@@ -29,7 +29,7 @@
         {% endblock head %}
 
     </head>
-      <body class="d-flex flex-column min-vh-100">
+          <body class="d-flex flex-column min-vh-100">
               <!-- navbar -->
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark align-items-center pt-4 pb-3">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -47,16 +47,13 @@
                     <li class="nav-item">
                       <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About project</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link {% if request.resolver_match.url_name == 'maps' %}active{% endif %}" href="{% url 'maps' %}">Maps</a>
-                    </li>
                   </ul>
                 </div>
               </nav>
-
-              <!-- jumbotron -->
-              {% block jumbotron %}
-              {% endblock jumbotron %}
+            <div id="content-wrapper" class="my-content-wrapper">
+              <!-- hero -->
+              {% block hero %}
+              {% endblock hero %}
 
               <!-- flashing messages -->
               <div class="container">
@@ -73,19 +70,21 @@
               <br>
 
               <!-- block content -->
+                 <div class="main-content py-5 mb-5">
               {% block content %}
               {% endblock content %}
+                 </div>
 
               <!-- Footer -->
-              <footer class="mt-auto">
-                <div class="container-fluid text-center bg-dark text-white pt-3">   
-                  <div class="row">
-                    <div class="col-12">
-                      <p><small>Created by Petr Hamrozi <br> hamrozipetr@outlook.com </small></p>
-                    </div>
-                  </div>
-                </div>
-              </footer>
+              <footer class="mt-5">
+  <div class="container-fluid text-center bg-dark text-white">
+    <div class="row">
+      <div class="col-12">
+        <p><small>Created by Petr Hamrozi <br> hamrozipetr@outlook.com </small></p>
+      </div>
+    </div>
+  </div>
+</footer>
             
               <!-- Optional JavaScript -->
               <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -99,14 +98,143 @@
               integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>     
               <!--  other possible libraries -->
               <!-- Bootstrap CSS -->
-                <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
                 <!-- Bootstrap Bundle with Popper -->
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 
               {% block javascript %}
-                           
+              <script>
+
+
+// ablation
+                  document.getElementById("openLablation").onclick = () => {
+    document.getElementById("popupWindow").style.display = "block";
+    generateFormFields();
+};
+
+document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+document.getElementById("elementsForm").onsubmit = function(event) {
+    event.preventDefault();
+    alert("Form submitted!");
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+function generateFormFields() {
+    const elements = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"];
+    const container = document.querySelector("#elementsForm .form-group");
+    container.innerHTML = ""; // Clear existing fields if any
+
+    elements.forEach(function(element, index) {
+        const label = document.createElement("label");
+        label.textContent = element + ": ";
+        label.htmlFor = "element-" + index;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "element-" + index;
+        input.name = element;
+        input.classList.add('form-control'); // If you're using Bootstrap
+
+        const div = document.createElement("div");
+        div.appendChild(label);
+        div.appendChild(input);
+
+        container.appendChild(div);
+    });
+}
+// multimodal
+
+                  document.getElementById("openMultimodal").onclick = () => {
+    document.getElementById("popupWindow").style.display = "block";
+    generateFormFields();
+};
+
+document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+document.getElementById("elementsForm").onsubmit = function(event) {
+    event.preventDefault();
+    alert("Form submitted!");
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+function generateFormFields() {
+    const elements = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"];
+    const container = document.querySelector("#elementsForm .form-group");
+    container.innerHTML = ""; // Clear existing fields if any
+
+    elements.forEach(function(element, index) {
+        const label = document.createElement("label");
+        label.textContent = element + ": ";
+        label.htmlFor = "element-" + index;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "element-" + index;
+        input.name = element;
+        input.classList.add('form-control'); // If you're using Bootstrap
+
+        const div = document.createElement("div");
+        div.appendChild(label);
+        div.appendChild(input);
+
+        container.appendChild(div);
+    });
+}
+
+
+//xrf
+
+                  document.getElementById("openXRF").onclick = () => {
+    document.getElementById("popupWindow").style.display = "block";
+    generateFormFields();
+};
+
+document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+document.getElementById("elementsForm").onsubmit = function(event) {
+    event.preventDefault();
+    alert("Form submitted!");
+    document.getElementById("popupWindow").style.display = "none";
+};
+
+function generateFormFields() {
+    const elements = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"];
+    const container = document.querySelector("#elementsForm .form-group");
+    container.innerHTML = ""; // Clear existing fields if any
+
+    elements.forEach(function(element, index) {
+        const label = document.createElement("label");
+        label.textContent = element + ": ";
+        label.htmlFor = "element-" + index;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "element-" + index;
+        input.name = element;
+        input.classList.add('form-control'); // If you're using Bootstrap
+
+        const div = document.createElement("div");
+        div.appendChild(label);
+        div.appendChild(input);
+
+        container.appendChild(div);
+    });
+}
+
+
+
+
+                 </script>
               {% endblock %}
+            </div>
       </body>
 </html>
 

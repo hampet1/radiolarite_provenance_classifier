@@ -2,33 +2,59 @@
 
 {% block title %} Home {% endblock %}
 
-{% block jumbotron %}
-<div class="jumbotron">
-  <h2>Radiolarite Provenance Classifier</h2><br>
-  <p>This application is used to determine the origin of radiolarite based on proportion of certain chemical elements measure
-  using analytical techniques</p>
-  <p>To fill out the form properly, please check out our <a href="{% url 'guideline' %}">guideline</a>.</p>
+
+
+
+{% block hero %}
+<!-- Modern Hero Section with Full-Width Gradient Background -->
+<div class="hero-section">
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="text-center text-white px-3">
+      <h1 class="display-4 fw-bold">Radiolarite Provenance Classifier</h1>
+      <p class="lead">Determine the origin of radiolarite samples in Central Europe</p></br>
+      <a href="{% url 'guideline' %}" class="btn btn-outline-light btn-lg" role="button">Learn More</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block content %}
+
+<!-- Popup Window -->
+<div id="popupWindow" class="popup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <h2>Enter Values for Elements</h2><br>
+        <form id="elementsForm">
+            <div class="form-group">
+                <!-- Form fields will be generated here -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<!-- Content Section -->
 <div id="own-bottom-margin">
   <section class="container-fluid padding">
-    <div class="row">
-      <div class="col-12">
-        <div class="text-center mb-4">
-          <h3>Select Analytical Method:</h3></br>
-          <!-- Analysis Type Buttons -->
-          <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Analytical Method
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">LA-ICP-MS</a>
-                <a class="dropdown-item" href="#">XRF</a>
-                <a class="dropdown-item" href="#">LA-ICP-MS + XRF + Spectrophotometry</a>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8">
+        <div class="text-center mb-5 mt-5">
+          <h3>Select Analytical Method</h3></br>
+          <!-- Analysis Type Dropdown -->
+
+          <div class="tile-container">
+            <div class="tile">
+              <li><a class="dropdown-item" href="#" id="openLablation">LA-ICP-MS</a></li>
+             </div>
+              <div class="tile">
+              <li><a class="dropdown-item" href="#" id="openMultimodal" >LA-ICP-MS + XRF + Spectrophotometry</a></li>
               </div>
+            <div class="tile">
+              <li><a class="dropdown-item" href="#" id="openXRF"> XRF</a></li>
             </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </section>

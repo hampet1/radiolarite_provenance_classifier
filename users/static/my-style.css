@@ -1,64 +1,218 @@
-
-html { width:100%; height:100%; margin:0 padding:0; }
-body { width:100%; height:100%; margin:0; padding:0;}
-
-.p-4 {
-        margin-bottom: 50px;
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 
+body {
+  display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(224,95,15,1) 0%, rgba(168,42,25,1) 100%);/* Replace with your chosen colors */
+    color: #f0f0f0; /* Ensure the text color provides enough contrast */
 
-/* Custom hover effect for dropdown items */
-.dropdown-item:hover {
-    background-color: #5dbea3; /* Change hover color */
-    color: white; /* Optional: change text color on hover */
+}
+
+.tile-container {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px; /* This creates space between the tiles */
+    padding: 5px;
+  }
+  .tile {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Ensures text alignment is centered if it wraps */
+  border: 1px solid #ccc; /* Solid border for each tile */
+  padding: 5px;
+  background-color: #f9f9f9; /* Light background for the tiles */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow to each tile */
+  transition: transform 0.2s; /* Optional: adds a subtle hover effect */
+  width: 100%; /* Adjust width as necessary */
+  height: 100%; /* Adjust height as necessary */
+}
+
+.tile a {
+  text-decoration: none;
+  color: black; /* Ensures the text inside the tile is black and not the default anchor tag blue */
+  font-size: 24px;
+  display: block; /* Makes the anchor fill the tile for better clickability */
+  width: 100%; /* Ensures the anchor tag takes up the full width of the tile */
+  height: 100%; /* Ensures the anchor tag takes up the full height of the tile, adjust as necessary */
+}
+
+  .tile:hover {
+
+    transform: scale(1.05); /* Optional: tile grows slightly on hover */
+
+  }
+
+#own-bottom-margin {
+    margin-bottom: 4rem;
+
+}
+/* Padding adjustments */
+.padding {
+    padding: 3rem 0;
 }
 
 
-.p-3{
-    margin-top: 50px;
+/* Jumbotron with a modern look */
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(224,95,15,1) 0%, rgba(168,42,25,1) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50vh; /* You can adjust the height as you like */
+    margin-bottom: -6rem;
+    width: 100vw; /* Ensures it stretches full width */
+    overflow: hidden; /* Prevents any overflow from the viewport width */
+
 }
 
-.jumbotron {
-    text-align:center;
-}
+/* The rest of your CSS remains unchanged */
 
+
+/* Navigation styles */
 nav {
-      padding: 24px;
-      text-align: center;
+    padding: 0.4rem 0;
+    background-color: #333; /* Dark background for navbar */
 }
-h2 {
- color: red;
 
-}
 nav a {
-  color: white;
-  font-size: 20px;
-  padding: 20px 0;
-  margin: 0 5px;
-  font-size: 17px;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 nav a:hover {
-  background-color: #22853d;
+    background-color: #4a90e2; /
+    border-radius: 0.25rem;
 }
+.content {
+    flex: 1 0 auto;
+ }
 
-#own-bottom-margin {
-  margin-bottom: 10%;
-}
 
+
+/* Footer styles */
 footer {
-  padding-top: 5%;
+    flex-shrink: 0;
+    background-color: #333; /* Example background color */
+    color: #fff; /* Example text color */
+  }
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
 }
 
-.my-signup {
-    background-color:#d5d7f0;
-    padding:20px;
-    border-radius: 25px;
-    margin-top: 50px;
-    margin-bottom:80px;
+
+
+/* Responsive breakpoints for better mobile viewing */
+@media (max-width: 768px) {
+    .padding {
+        padding: 1.5rem 0;
+    }
+
+    .hero-section {
+        padding: 1rem 1rem;
+    }
+
+    .my-signup {
+        padding: 1rem;
+    }
+
+    nav {
+        padding: 1rem 0;
+    }
+}
+ <!-- pop up window -->
+ .popup-window {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 
-.form-group {
-    align-items-center;
+.popup-content {
+  background-color: #red;
+  text-align:center;
+  margin: auto;
+  padding: 20px;
+  border: 3px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+<! -- popup -->
+.popup {
+    position: fixed;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #ccc;
+    display: none;
+}
+
+.popup-content {
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.form-group div {
+    margin-bottom: 10px;
+    display:flex;
+    justify-content:center;
+    align-items: center; /* Center vertically */
+    text-align: center;
+    width:75%;
+}
+
+label {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    width: 65%;
 }
