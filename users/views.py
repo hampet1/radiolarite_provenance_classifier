@@ -21,3 +21,26 @@ def maps(request):
 
 def classify(request):
     return render(request)
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt  # Temporarily disable CSRF token for simplicity
+def process_elements_form(request):
+    if request.method == 'POST':
+        # Extract and sum the values from the form data
+        print("process was called")
+        total_sum = sum(float(value) for key, value in request.POST.items() if value.isdigit())
+        print("total sum is", total_sum)
+        # Return the sum as JSON response
+        return JsonResponse({'total_sum': total_sum})
+
+    # Handle non-POST requests, though this example focuses on POST
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def test_ajax(request):
+    print("ajax is working")
+    return JsonResponse({"message": "Hello from Django!"})

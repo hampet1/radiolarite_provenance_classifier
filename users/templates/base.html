@@ -119,36 +119,47 @@ document.getElementById("closePopup").onclick = () => {
 
 document.getElementById("elementsForm").onsubmit = function(event) {
     event.preventDefault();
-    alert("Form submitted!");
-    document.getElementById("popupWindow").style.display = "none";
+    console.log("form was submitted");
+    // Collect form data
+    const formData = new FormData(event.target);
+    fetch('/process-elements-form/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            // Assuming you have CSRF token in your template. If not, you'll need to handle CSRF.
+            'X-CSRFToken': getCookie('csrftoken'), // Function to get cookie by name
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Form submitted! Total sum: " + data.total_sum);
+        document.getElementById("popupWindow").style.display = "none";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 };
 
-function generateFormFields() {
-    const elements = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"];
-    const container = document.querySelector("#elementsForm .form-group");
-    container.innerHTML = ""; // Clear existing fields if any
-
-    elements.forEach(function(element, index) {
-        const label = document.createElement("label");
-        label.textContent = element + ": ";
-        label.htmlFor = "element-" + index;
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.id = "element-" + index;
-        input.name = element;
-        input.classList.add('form-control'); // If you're using Bootstrap
-
-        const div = document.createElement("div");
-        div.appendChild(label);
-        div.appendChild(input);
-
-        container.appendChild(div);
-    });
+// Helper function to get CSRF token from cookies
+function getCookie(name) {
+    console.log("this is working");
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
+
 // multimodal
 
-                  document.getElementById("openMultimodal").onclick = () => {
+document.getElementById("openMultimodal").onclick = () => {
     document.getElementById("popupWindow").style.display = "block";
     generateFormFields();
 };
