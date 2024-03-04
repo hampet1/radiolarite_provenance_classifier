@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d8b6-70_h@--*1)b3p^!b$4ob6#0a8h2l*=mt3puky5-b7b*s&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.231.160.52']
+ALLOWED_HOSTS = ['13.231.160.52', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'users',
 ]
 
@@ -111,6 +112,30 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+AWS_ACCESS_KEY_ID = 'AKIAWB2UPOPFQQ2ST6MX'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'radiolaritebucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
+
+
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STORAGES = {
+
+    # Media file (image) management
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+
+    # CSS and JS file management
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+}
 
 
 # Static files (CSS, JavaScript, Images)
