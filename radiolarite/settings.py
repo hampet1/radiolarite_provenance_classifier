@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['13.231.160.52']
 
-x_b =10
 
 # Application definition
 
