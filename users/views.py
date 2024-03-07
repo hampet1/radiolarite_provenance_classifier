@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .forms import ElementForm
 # Create your views here.
 
 def index(request):
@@ -24,21 +24,25 @@ def classify(request):
 
 
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
 
-@csrf_exempt  # Temporarily disable CSRF token for simplicity
 def process_elements_form(request):
+    """
+    process all data and feed them the model
+    """
     if request.method == 'POST':
-        # Extract and sum the values from the form data
-        print("process was called")
-        total_sum = sum(float(value) for key, value in request.POST.items() if value.isdigit())
-        print("total sum is", total_sum)
-        # Return the sum as JSON response
-        return JsonResponse({'total_sum': total_sum})
+        form = ElementForm(request.POST)
+        if form.is_valid():
+            # all values from the file
+            total_sum = sum(value for value in form.cleaned_data.values() if value is not None)
+            return JsonResponse({'total_sum': total_sum})
+        else:
+            # Return form errors as JSON
+            return JsonResponse({'error': form.errors.as_json()}, status=400)
 
-    # Handle non-POST requests, though this example focuses on POST
+    # If it's not a POST request, return an error
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
 
 
 def test_ajax(request):

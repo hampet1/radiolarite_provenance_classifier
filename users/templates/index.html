@@ -12,13 +12,23 @@
     <div class="text-center text-white px-3">
       <h1 class="display-4 fw-bold">Radiolarite Provenance Classifier</h1>
       <p class="lead">Determine the origin of radiolarite samples in Central Europe</p></br>
-      <a href="{% url 'guideline' %}" class="btn btn-outline-light btn-lg" role="button">Learn More</a>
+      <a href="{% url 'guideline' %}" class="btn btn-outline-light btn-lg" role="button">Guideline</a>
     </div>
   </div>
 </div>
 {% endblock %}
 
 {% block content %}
+<!-- Result Modal -->
+<div id="resultModal" class="popup2" style="display:none;">
+  <div class="popup-content">
+    <span class="close" id="closeResultModal">&times;</span>
+    <h2>Result</h2>
+    <div id="resultMessage">The total sum is: <span id="resultValue"></span></div>
+  </div>
+</div>
+
+
 
 <!-- Popup Window -->
 <div id="popupWindow" class="popup" style="display:none;">
