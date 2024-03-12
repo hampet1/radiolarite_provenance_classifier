@@ -2,13 +2,75 @@
 
             {% block content %}
 
+<style>
+    body { font-family: Arial, sans-serif; }
+    .method-description { margin-bottom: 20px; }
+    .formula { background-color: #f8f8f8; border-left: 5px solid #2c3e50; padding: 10px; }
+</style>
+
         <section class="container-fluid bg">
             <section class= "row justify-content-center ">
                 <section class="col-6 p-0"><br>
-                    <h3 style="text-align:center;"> Guideline </h3><br>
-                    <p> This guideline aims to help users to provide correct data for the classifier. Training data were collected using ... <br> If you have any questions or concerns about the matter below, please do not hesitate to contact ... </p><br><hr><br>
-                    <h3 style="margin-bottom: 500px;"> Doplnit !!!!!!!!!</h3>
+                    <div style="background-color: #343A40; padding: 20px; font-family: Arial, sans-serif;">
+                    <h2 style="text-align:center; margin-top: 20px;"> Guideline </h2><br>
+                    <p style="text-align:center;"> This guideline aims to help users to provide correct data input for the classifier and understand its outcome.</p><br>
+                        <hr style="background-color:#B53617;">
+                        <br>
 
+                    <h4>Please choose one of the following analytical options:</h4>
+                    <ul>
+                        <li>LA-ICP-MS</li>
+                        <li>XRF</li>
+                        <li>A combination of LA-ICP-MS, XRF + Spectrophotometry</li>
+                    </ul>
+                    <hr style="background-color:#B53617;">
+
+                    <h2>X-Ray Fluorescence (XRF) Method</h2>
+    <p>
+        The XRF method measures the following chemical elements: Ti, Mn, Fe, Ni, Cu, Zn, As, Rb, Sr.
+        The results are obtained in absolute quantities (µg/g). Due to the nature of the data, the following transformation is applied:
+    </p>
+
+        <p>To normalize the data for the classifier:</p>
+        <ol>
+            <li>Calculate the total quantity of all measured elements per sample (\( S \)):</li><br>
+            <p> \( S = \sum (Ti + Mn + Fe + Ni + Cu + Zn + As + Rb + Sr) \) </p>
+            <li>Divide the quantity of each element by the total quantity (\( S \)) to get the proportion (\( P \)):</li><br>
+            <h5> \( P_{element} = \frac{Element\;quantity}{S} \) </h5>
+            <li>Round the proportions to a maximum of 6 decimal places before input into the form.</li>
+            <li> example: </li>
+            <p>
+                  \[
+                  \begin{aligned}
+                  S &= 333.451852 + 430.451852 + 1892.435185 + 358.242593  +  \\
+                    &\quad 348.394444 + 324.851852 + 4.537037 + 23.016667 + 103.583333 \\
+                  \\
+                  p_{\text{Ti}} &= \frac{333.451852}{S} \approx 0.084537 \\
+                  p_{\text{Mn}} &= \frac{430.451852}{S} \approx 0.229794 \\
+                  p_{\text{Fe}} &= \frac{1892.435185}{S} \approx 0.346599 \\
+                  p_{\text{Ni}} &= \frac{358.242593}{S} \approx 0.087979 \\
+                  p_{\text{Cu}} &= \frac{348.394444}{S} \approx 0.096395 \\
+                  p_{\text{Zn}} &= \frac{324.851852}{S} \approx 0.119020 \\
+                  p_{\text{As}} &= \frac{4.537037}{S} \approx 0.002181 \\
+                  p_{\text{Rb}} &= \frac{23.016667}{S} \approx 0.005656 \\
+                  p_{\text{Sr}} &= \frac{103.583333}{S} \approx 0.027838
+                  \end{aligned}
+                  \]
+                </p>
+
+        </ol>
+
+    <p>
+        Upon submission, the data will be processed using a Linear Discriminant Analysis (LDA) model from scikit-learn library.
+        The predict_proba method from the LDA model will be used to calculate the probability of the sample belonging to one of the seven predefined regions
+        ,namely; Northern Calcareous Alps (Austria), St. Veit Klippen Belt (Austria), Gerecse Mountains (Hungary), Palava Hills (Czech Republic), Western Slovakia, Pieniny (Poland), Artefacts (Czech Republic).
+        The region with the highest probability will be selected as the most likely origin of the sample.
+    </p>
+    <p>
+        For more information on the LDA model, please visit
+        <a href="https://scikit-learn.org/0.16/modules/generated/sklearn.lda.LDA.html" target="_blank">scikit-learn's LDA documentation</a>.
+    </p>
+     </div>
             </section>
           </section>
          </section>
