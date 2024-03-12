@@ -112,7 +112,7 @@ function generateFormFields(method) {
     const elementsByMethod = {
         "openLablation": ["H", "He", "Li"],
         "openMultimodal": ["Be", "B", "C"],
-        "openXRF": ["N", "O", "F", "Ne", "Na", "Mg"]
+        "openXRF": ['Ti', 'Mn', 'Fe', 'Ni', 'Cu', 'Zn', 'As', 'Rb', 'Sr']
     };
 
     const elements = elementsByMethod[method] || [];
@@ -128,7 +128,7 @@ function generateFormFields(method) {
         input.type = "number"; // Changed to 'number' to ensure numerical input
         input.min = "0";
         input.max = "1";
-        input.step = "0.01"; // Allow decimal values
+        input.step = "0.000001"; // Allow decimal values
         input.id = "element-" + index;
         input.name = element;
         input.classList.add('form-control');
