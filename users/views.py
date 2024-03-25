@@ -8,6 +8,8 @@ from joblib import load
 xrf_model = load('lda_model_xrf.joblib')
 # for ablation, using randomforest
 ablation_model = load('ablation_model.joblib')
+# for multimodal, using randomforest
+multimodal_model = load('multimodal_model.joblib')
 
 
 
@@ -74,7 +76,7 @@ def process_elements_form(request):
                 elif model_type == "openAblation":
                     model = ablation_model
                 elif model_type == "openMultimodal":
-                    pass
+                    model = multimodal_model
                 else:
                     print("none of the models were used")
 

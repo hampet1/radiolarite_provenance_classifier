@@ -109,13 +109,19 @@
               {% block javascript %}
               <script>
 
-
 function generateFormFields(method) {
     // Define element groups based on the method
     const elementsByMethod = {
         "openAblation": ['Sr', 'Ba', 'Cr', 'W', 'U', 'Mn', 'Li'],
-        "openMultimodal": ["Be", "B", "C"],
+        "openMultimodal": ['Ba', 'Cr', 'U', 'Li', 'Fe', 'Ni', 'Cu', 'As', 'Rb', 'L*'],
         "openXRF": ['Ti', 'Mn', 'Fe', 'Ni', 'Cu', 'Zn', 'As', 'Rb', 'Sr']
+    };
+
+    // Titles for organizing openMultimodal form
+    const titlesForMultimodal = {
+        "LA-ICP-MS [0,1]": ['Ba', 'Cr', 'U', 'Li'],
+        "XRF [0,1]": ['Fe', 'Ni', 'Cu', 'As', 'Rb'],
+        "Spectrophotometry [z-score]": ['L*']
     };
 
     const elements = elementsByMethod[method] || [];
@@ -129,28 +135,53 @@ function generateFormFields(method) {
     hiddenMethodInput.value = method;
     container.appendChild(hiddenMethodInput);
 
-    // Generate form fields for elements
-    elements.forEach(function(element, index) {
-        const label = document.createElement("label");
-        label.textContent = element + ": ";
-        label.htmlFor = "element-" + index;
+    if (method === "openMultimodal") {
+        // For openMultimodal, organize elements under titles
+        Object.keys(titlesForMultimodal).forEach((title) => {
+            const methodElements = titlesForMultimodal[title].filter(element => elements.includes(element));
+            if (methodElements.length > 0) {
+                // Add a title if there are elements in this category
+                const titleElement = document.createElement("h4");
+                titleElement.textContent = title;
+                container.appendChild(titleElement);
 
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "0";
-        input.max = "1";
-        input.step = "0.000001";
-        input.id = "element-" + index;
-        input.name = element;
-        input.classList.add('form-control');
-
-        const div = document.createElement("div");
-        div.appendChild(label);
-        div.appendChild(input);
-
-        container.appendChild(div);
-    });
+                // Generate form fields for these elements
+                methodElements.forEach((element) => {
+                    addFormField(element, container);
+                });
+            }
+        });
+    } else {
+        // For openAblation and openXRF, list all elements without titles
+        elements.forEach((element) => {
+            addFormField(element, container);
+        });
+    }
 }
+
+function addFormField(element, container) {
+    const label = document.createElement("label");
+    label.textContent = element + ": ";
+    label.htmlFor = "element-" + element; // Use element name for better association
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.max = "100"; // Adjusted max value if needed
+    input.step = "0.01"; // Adjusted step value if needed
+    input.id = "element-" + element;
+    input.name = element;
+    input.classList.add('form-control');
+
+    const div = document.createElement("div");
+    div.classList.add('mb-3'); // Add some margin-bottom for spacing
+    div.appendChild(label);
+    div.appendChild(input);
+
+    container.appendChild(div);
+}
+
+
 
 
 // existing handler
@@ -163,6 +194,8 @@ document.getElementById("openAblation").onclick = () => {
 document.getElementById("openMultimodal").onclick = () => {
     document.getElementById("popupWindow").style.display = "block";
     generateFormFields("openMultimodal");
+
+    document.getElementById("guideline_user").style.display = "none";
 };
 document.getElementById("openXRF").onclick = () => {
     document.getElementById("popupWindow").style.display = "block";
@@ -225,6 +258,13 @@ function getCookie(name) {
 document.getElementById("closeResultModal").onclick = function() {
     document.getElementById("resultModal").style.display = "none";
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("closePopup").onclick = function() {
+        document.getElementById("popupWindow").style.display = "none";
+    };
+});
+
 
                  </script>
               {% endblock %}
